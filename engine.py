@@ -1,6 +1,7 @@
 from random import randint
 
 
+
 def new_game():
     size = 10*[0]
     mat = []
@@ -33,60 +34,34 @@ def add_num(mat):
                             elif mat[i+w][j+q] == 9 :
                                 mat[i][j] += 1
 
-
-
-
-                    
-##                    if mat[0][1] == 9  and mat[1][0] == 9 and mat[1][1] == 9:
-##                        mat [0][0] += 3
-##
-##                    elif mat[0][1] == 9 and (mat[1][0] or mat[1][1]) == 9:
-##                        mat[0][0] += 2
-##
-##                    elif mat[1][0] == 9 and mat[1][1] == 9 :
-##                        mat[0][0] += 2
-##
-##                    elif mat[0][1] == 9 or mat[1][0] == 9 or mat[1][1] == 9:
-##                        mat[0][0] += 1
      
                 elif i == 0  and j == 9 :
-                    if mat[0][8] == 9  and mat[1][9] == 9 and mat[1][8] == 9:
-                        mat [0][9] += 3
+                    for q in range(2):
+                        for w in range(2):
+                            if q == 1 and w == 0:
+                                continue
 
-                    elif mat[0][8] == 9 and (mat[1][9] or mat[1][8] == 9):
-                        mat[0][9] += 2
+                            elif mat[i+q][j-1+w] == 9 :
+                                mat[i][j] += 1
 
-                    elif mat[1][9] == 9 and mat [1][8] == 9 :
-                        mat[0][9] += 2
-
-                    elif mat[0][8] == 9 or mat[1][9] == 9 or mat[1][8] == 9:
-                        mat[0][9] += 1
                     
                 elif i == 9 and j == 0 :
-                    if mat[8][0] == 9  and mat[9][1] == 9 and mat[8][1] == 9:
-                        mat [9][0] += 3
+                    for q in range(2):
+                        for w in range(2):
+                            if q == 1 and w == 0:
+                                continue
 
-                    elif mat[8][0] == 9 and (mat[9][1] or mat[8][1] == 9):
-                        mat[9][0] += 2
-
-                    elif mat[9][1] == 9 and mat [8][1] == 9 :
-                        mat[9][0] += 2
-
-                    elif mat[8][0] == 9 or mat[9][1] == 9 or mat[8][1] == 9:
-                        mat[9][0] += 1
+                            elif mat[i-1+q][j+w] == 9:
+                                mat[i][j] += 1
 
                 elif i == 9 and j == 9:
-                    if mat[9][8] == 9  and mat[8][9] == 9 and mat[8][8] == 9:
-                        mat [9][9] += 3
+                    for q in range(2):
+                        for w in range(2):
+                            if q == 1 and w == 1:
+                                continue
 
-                    elif mat[9][8] == 9 and (mat[8][9] or mat[8][8] == 9):
-                        mat[9][9] += 2
-
-                    elif mat[8][9] == 9 and mat [8][8] == 9 :
-                        mat[9][9] += 2
-
-                    elif mat[9][8] == 9 or mat[8][9] == 9 or mat[8][8] == 9:
-                        mat[9][9] += 1
+                            elif mat[i-1+w][j-1+q] == 9 :
+                                mat[i][j] += 1
 
 
                 elif i == 0 and (j != 0 or j != 9):
@@ -151,13 +126,18 @@ def position(x, y, boom, mat, pmat):
     
 def in_game(mat):
     pmat = new_game()
+    def print_game(pmat):
+        for row in pmat:
+            print(''.join(map(lambda x: str(x).rjust(5), row)))
+    GRID_SIZE = 10
     while True:
-        print(pmat)
+        print_game(pmat)
         rate = 0 
         position(input('row: '), input('column: '), input('press b to place a flat: '), mat , pmat)
+        
         for i in range(10):
             if 9 in pmat[i]:
-                print(pmat)
+                print_game(pmat)
                 return ('You Lose')
 
             else:
@@ -170,6 +150,8 @@ def in_game(mat):
                 else :
                     continue
 
-        print(rate)
         if rate == 10:
             return ('You Win')  
+
+
+
