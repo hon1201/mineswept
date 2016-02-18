@@ -154,8 +154,10 @@ def in_game(mat):
             return ('You Win')  
 
 
-mat = new_game()
-add_boom(mat)
-add_num(mat)
-in_game(mat)
+####for testing purpose#####
+        
+##mat = new_game()
+##add_boom(mat)
+##add_num(mat)
+##in_game(mat)
 
