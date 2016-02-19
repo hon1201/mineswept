@@ -1,7 +1,5 @@
 from random import randint
 
-
-
 def new_game():
     size = 10*[0]
     mat = []
@@ -123,35 +121,36 @@ def position(x, y, boom, mat, pmat):
         pmat[int(x)][int(y)] = mat[int(x)][int(y)]
 
     return pmat
+
     
-def in_game(mat):
-    pmat = new_game()
-    def print_game(pmat):
-        for row in pmat:
-            print(''.join(map(lambda x: str(x).rjust(5), row)))
-    GRID_SIZE = 10
-    while True:
-        print_game(pmat)
-        rate = 0 
-        position(input('row: '), input('column: '), input('press b to place a flat: '), mat , pmat)
-        
-        for i in range(10):
-            if 9 in pmat[i]:
-                print_game(pmat)
-                return ('You Lose')
-
-            else:
-                continue
-        for a in range(10):
-            for b in range(10):
-                if mat[a][b] == 9 and pmat[a][b] == '*':
-                    rate += 1
-
-                else :
-                    continue
-
-        if rate == 10:
-            return ('You Win')  
+##def in_game(mat):
+##    pmat = new_game()
+##    def print_game(pmat):
+##        for row in pmat:
+##            print(''.join(map(lambda x: str(x).rjust(5), row)))
+##    GRID_SIZE = 10
+##    while True:
+##        print_game(pmat)
+##        rate = 0 
+##        position(input('row: '), input('column: '), input('press b to place a flat: '), mat , pmat)
+##        
+##        for i in range(10):
+##            if 9 in pmat[i]:
+##                print_game(pmat)
+##                return ('You Lose')
+##
+##            else:
+##                continue
+##        for a in range(10):
+##            for b in range(10):
+##                if mat[a][b] == 9 and pmat[a][b] == '*':
+##                    rate += 1
+##
+##                else :
+##                    continue
+##
+##        if rate == 10:
+##            return ('You Win')  
 
 
 ####for testing purpose#####
