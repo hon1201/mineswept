@@ -10,11 +10,19 @@ def new_game():
     return mat
 
 def add_boom(mat):
-    for i in range (10):
-        random = randint(0, 9)
-        random1 = randint(0,9)
-        mat[random][random1] = 9
-        
+    for i in range(10):
+        add_boom2(mat)
+
+
+def add_boom2(mat):
+    random = randint(0, 9)
+    random1 = randint(0,9)
+    if mat[random][random1] == 9:
+        add_boom2(mat)
+
+    else: 
+        mat[random][random1] = 9 
+    
     return mat
 
 def add_num(mat):
@@ -86,7 +94,7 @@ def add_num(mat):
                 elif j == 0 and (i != 0  or i != 9):
                     for q in range(3):
                         for w in range(2):
-                            if q == 0 and w == 1:
+                            if q == 1 and w == 0:
                                 continue
 
                             else:
