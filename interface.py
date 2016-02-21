@@ -2,9 +2,7 @@ from tkinter import *
 from engine import *
 
      
-mat = new_game()
-add_boom(mat)
-add_num(mat)
+
 
 layout = Tk()
 layout.geometry('250x270+100+200')
@@ -114,6 +112,9 @@ def check(i, j , b ,mat):
             show(i, j+1, b, mat)
             show(i+1, j, b, mat)
                 
+    
+
+
 
 ##def show_value(i ,j,b,mat):
 ##    count = 0
@@ -133,11 +134,22 @@ def check(i, j , b ,mat):
 ##
 ##    if count == 90:
 ##        win(mat, b)
+def new():
+    mat = new_game()
+    add_boom(mat)
+    add_num(mat)
+    for i in range(10):
+      for j in range(10):
+        b[i][j] = Box(mat[i][j])
+        b[i][j].becomebutton(i, j,b,mat)
 
-for i in range(10):
-  for j in range(10):
-    b[i][j] = Box(mat[i][j])
-    b[i][j].becomebutton(i, j,b,mat)
+menu = Menu(layout)
+layout.config(menu = menu)
+filemenu = Menu(menu)
+menu.add_cascade(label = 'Option', menu = filemenu)
+filemenu.add_command(label = 'New Game', command = new)
+
+new()
 
 
 
