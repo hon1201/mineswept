@@ -16,13 +16,36 @@ class Box:
 
     def __init__(self, value):
         self.value = value
-        self.state = True
+        self.status = True
 
     def becomebutton(self,i ,j,b,mat):
-        self = Button(layout,command = lambda: show_value(i, j,b,mat), width = 2).grid(column = j, row = i)
+        self = Button(layout,command = lambda: show(i, j,b,mat), width = 2).grid(column = j, row = i)
 
     def over(self):
-        self.state = False
+        self.status = False
+
+    def show_value(self,i ,j,b,mat):
+        count = 0
+        self.over()
+        self = Button(layout, text = mat[i][j],state = DISABLED, width = 2).grid(column = j , row = i)
+##        if mat[i][j] == 0:
+##            check(i , j ,b, mat)
+        
+        if mat[i][j] == 9:
+            lose(b, mat)
+
+        else:
+            for q in range(10):
+                for w in range(10):
+                    if b[q][w].status == False:
+                        count += 1
+
+        if count == 90:
+            win(mat, b)
+
+def show(i, j, b, mat):
+    b[i][j].show_value(i, j, b, mat)
+    
 
 
 def lose(b,mat):
@@ -35,7 +58,7 @@ def lose(b,mat):
                 b[i][j] = Button(layout, text = mat[i][j],state = DISABLED, width = 2).grid(column = j , row = i)
 
             elif mat[i][j] != 9:
-                if b[i][j].state == True:
+                if b[i][j].status == True:
                     b[i][j] = Button(layout,state = DISABLED, width = 2).grid(column = j , row = i)
 
 def win(mat, b):
@@ -47,21 +70,69 @@ def win(mat, b):
             if mat[i][j] == 9:
                 b[i][j] = Button(layout, text = mat[i][j],state = DISABLED, width = 2).grid(column = j , row = i)
                 
-def show_value(i ,j,b,mat):
-    count = 0 
-    self = Button(layout, text = mat[i][j],state = DISABLED, width = 2).grid(column = j , row = i)
-    b[i][j].over()
-    if mat[i][j] == 9:
-        lose(b, mat)
+            
+def check(i, j , b ,mat):
+        if i == 0  and j == 0: 
+            show(i, j+1, b, mat)
+            show(i+1, j, b, mat)
 
-    else:
-        for q in range(10):
-            for w in range(10):
-                if b[q][w].state == False:
-                    count += 1
+        elif i == 0 and j == 9:
+            show(i, j-1, b, mat)
+            show(i+1, j, b, mat)
 
-    if count == 90:
-        win(mat, b)
+        elif i == 9 and j == 0:
+            show(i-1, j , b, mat)
+            show(i, j+1, b, mat)
+
+        elif i == 9 and j == 9:
+            show(i-1, j,b, mat)
+            show(i, j+1, b, mat)
+
+        elif i == 0 and (j != 0 or j != 9):
+            show(i, j-1, b, mat)
+            show(i, j+1, b, mat)
+            show(i+1, j, b, mat)
+
+        elif i == 9 and (j != 0 or j != 9):
+            show(i-1, j, b, mat)
+            show(i+1, j, b, mat)
+            show(i , j-1, b, mat)
+
+        elif j == 0 and (i != 0 or i != 9):
+            show(i-1, j, b, mat)
+            show(i+1, j, b, mat)
+            show(i, j+1, b, mat)
+
+        elif j == 9 and (i != 0 or i != 9):
+            show(i, j-1, b, mat)
+            show(i, j+1, b, mat)
+            show(i-1, j, b, mat)
+
+        else:
+            show(i-1, j ,b, mat)
+            show(i, j-1, b, mat)
+            show(i, j+1, b, mat)
+            show(i+1, j, b, mat)
+                
+
+##def show_value(i ,j,b,mat):
+##    count = 0
+##    self.over()
+##    self = Button(layout, text = mat[i][j],state = DISABLED, width = 2).grid(column = j , row = i)
+##    if mat[i][j] == 0:
+##        check(i , j ,b, mat)
+##    
+##    if mat[i][j] == 9:
+##        lose(b, mat)
+##
+##    else:
+##        for q in range(10):
+##            for w in range(10):
+##                if b[q][w].status == False:
+##                    count += 1
+##
+##    if count == 90:
+##        win(mat, b)
 
 for i in range(10):
   for j in range(10):

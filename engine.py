@@ -44,7 +44,7 @@ def add_num(mat):
                 elif i == 0  and j == 9 :
                     for q in range(2):
                         for w in range(2):
-                            if q == 1 and w == 0:
+                            if q == 0 and w == 1:
                                 continue
 
                             elif mat[i+q][j-1+w] == 9 :
